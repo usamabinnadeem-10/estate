@@ -1,0 +1,18 @@
+.main-wrapper {
+  height: 400px;
+  margin: 10px;
+}
+.info-wrapper {
+  margin-top: 15px;
+}
+.map-details {
+  text-align: center;
+  font-size: 1.2em;
+}
+.map-details span {
+  font-weight: bold;
+}
+.search-input {
+  font-size: 1.2em;
+  width: 80%;
+}
