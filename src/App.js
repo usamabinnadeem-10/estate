@@ -47,17 +47,17 @@ const dummyAds = [
 function App() {
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid p-0">
       <Header/>
       <Home/>
-      <div className="mb-4 d-flex flex-column" style={{marginTop : '120px'}}>
+      {/* <div className="mb-4 d-flex flex-column" style={{marginTop : '120px'}}>
         <h2 className="col-10 mx-auto my-4">Map Search</h2>
         <MapSearch
           center={{ lat: 40.6451594, lng: -74.0850826 }}
           zoom={10}
           places={dummyAds}
         />
-      </div>
+      </div> */}
       {/* <Ad/> */}
       {/* <Login/> */}
       {/* <SignUp/> */}
