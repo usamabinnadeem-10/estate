@@ -80,8 +80,6 @@ class MyGoogleMap extends Component {
         const geocoder = new mapApi.Geocoder;
 
         geocoder.geocode({ 'location': { lat: this.state.lat, lng: this.state.lng } }, (results, status) => {
-            console.log(results);
-            console.log(status);
             if (status === 'OK') {
                 if (results[0]) {
                     this.zoom = 12;
@@ -131,7 +129,7 @@ class MyGoogleMap extends Component {
                     onChildClick={() => console.log('child click')}
                     onClick={this._onClick}
                     bootstrapURLKeys={{
-                        key: 'AIzaSyDYuHFLdk-1Yw9IfmS2dtogQj1vL4DkO2E',
+                        key: 'AIzaSyAto6Hd2ZwWEnjL1muQdRUBulh7kDWtKuM',
                         libraries: ['places', 'geometry'],
                     }}
                     yesIWantToUseGoogleMapApiInternals
@@ -150,6 +148,7 @@ class MyGoogleMap extends Component {
                 <div className="info-wrapper">
                     <div className="map-details">Latitude: <span>{this.state.lat}</span>, Longitude: <span>{this.state.lng}</span></div>
                     <div className="map-details">Zoom: <span>{this.state.zoom}</span></div>
+                    <div className="map-details">Address: <span>{this.state.address}</span></div>
                 </div>
 
 
