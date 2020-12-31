@@ -18,7 +18,7 @@ function onChange(value) {
 
 export default function SignUp() {
     return (
-        <div className="d-flex card flex-column mx-auto col-4 p-4 fw-bold" style={{marginTop : '150px'}}>
+        <div className="d-flex card flex-column mx-auto col-md-4 col-10 p-4 fw-bold mb-4" style={{marginTop : '250px'}}>
             <h2>Register</h2>
             <div className="d-flex flex-column my-3">
                 <h6 className="text-muted">Name</h6>

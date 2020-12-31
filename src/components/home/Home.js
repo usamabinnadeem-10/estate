@@ -103,8 +103,8 @@ function Home() {
     
 
     return (
-        <div className="d-flex flex-column mx-auto col-12 bg-dark align-items-center" style={{marginTop : '150px',height: '400px'}}>
-            <div className="card">
+        <div className="d-flex flex-column mx-auto col-12 bg-dark align-items-center" style={{marginTop : '350px',height: '400px'}}>
+            <div className="card col-8">
                 {
                     err && (<h3 className="text-danger">*Please enter minimum and maximum amount and ensure that minimum is lesser than maximum</h3>)
                 }

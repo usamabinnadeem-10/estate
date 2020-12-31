@@ -19,17 +19,27 @@ function Buy({residential, commercial, by_the_day,
     },[optionLocal])
         
     useEffect(()=>{
-        function handleResize(){
-            if(window.innerWidth < 520 && window.innerWidth > 320){
-                document.getElementById('dropdownMenuButton').style.fontSize = '10px'
-            }else if(window.innerWidth <= 320){
-                document.getElementById('dropdownMenuButton').style.fontSize = '9px'
-            }
-            else{
-                document.getElementById('dropdownMenuButton').style.fontSize = 'inherit'
-            }
+        
+        if(window.innerWidth < 520 && window.innerWidth > 320){
+            document.getElementById('dropdownMenuButton').style.fontSize = '10px'
+        }else if(window.innerWidth <= 320){
+            document.getElementById('dropdownMenuButton').style.fontSize = '9px'
         }
-        window.addEventListener('resize', handleResize)
+        else{
+            document.getElementById('dropdownMenuButton').style.fontSize = 'inherit'
+        }
+
+        // function handleResize(){
+        //     if(window.innerWidth < 520 && window.innerWidth > 320){
+        //         document.getElementById('dropdownMenuButton').style.fontSize = '10px'
+        //     }else if(window.innerWidth <= 320){
+        //         document.getElementById('dropdownMenuButton').style.fontSize = '9px'
+        //     }
+        //     else{
+        //         document.getElementById('dropdownMenuButton').style.fontSize = 'inherit'
+        //     }
+        // }
+        // window.addEventListener('resize', handleResize)
     })
 
     const addRoomToList = (e) => {

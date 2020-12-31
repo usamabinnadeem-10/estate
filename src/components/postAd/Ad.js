@@ -8,7 +8,7 @@ import SellerInfo from './SellerInfo'
 function Ad() {
 
     return (
-      <div className="d-flex flex-column mx-auto col-10" style={{marginTop : '150px'}}>
+      <div className="d-flex flex-column mx-auto col-10" style={{marginTop : '350px'}}>
         <div className="d-flex flex-column" style={{margin : '10px 50px'}}>
           <h2>Post Ad</h2>
         </div>
