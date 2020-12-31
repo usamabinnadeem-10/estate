@@ -32,11 +32,14 @@ function Home() {
     const [option, setOption] = useState('residential')
     const [roomsSelected, setRoomsSelected] = useState([])
     const [coordinates, setCoordinates] = useState({})
-    const [price, setPrice] = useState({})
+    const [price, setPrice] = useState({
+        'min' : 0,
+        'max' : 0,
+    })
     const [pref1, setPref1] = useState([])
     const [pref2, setPref2] = useState([])
-
-
+    const [ok, setOk] = useState(false)
+    const [err, setErr] = useState(false)
 
     const setOptionHelper = option => {
         setOption(option)
@@ -46,24 +49,36 @@ function Home() {
         setSearch(search)
     }
 
-    const addRoomToListHelper = (e) => {
-        var isChecked = document.getElementById(e).checked
-        console.log(isChecked)
-        if (isChecked){
-            let temp = roomsSelected
-            temp.push(e)
-            setRoomsSelected(temp)
+    const addRoomToListHelper = (rooms) => {
+        setRoomsSelected(rooms)
+    }
+
+    const setPriceHelper = (amount, type) => {
+        var temp = price
+        if (type === 'min'){
+            temp['min'] = amount
         }else{
-            const index = roomsSelected.indexOf(e)
-            if(index > -1){
-                let temp = roomsSelected
-                temp.splice(index,1)
-                setRoomsSelected(temp)
-            }
-        } 
+            temp['max'] = amount
+        }
+        setPrice(temp)
+    }
+
+    const isPriceOk = () =>{
+
+        if (price['max'] > price['min']){
+            return true
+        }
+        return false
     }
 
     const go = (address) =>{
+        if(isPriceOk()){
+            setOk(true)
+            setErr(false)
+        }else{
+            setErr(true)
+        }
+        
         Geocode.fromAddress(address, "AIzaSyAto6Hd2ZwWEnjL1muQdRUBulh7kDWtKuM").then(
             response => {
               const { lat, lng } = response.results[0].geometry.location;
@@ -75,14 +90,25 @@ function Home() {
             error => {
               console.error(error);
             }
-          )
-        }
+        )
+    }
 
+    const setPref1Helper = pref => {
+        setPref1(pref)
+    }
+
+    const setPref2Helper = pref => {
+        setPref2(pref)
+    }
     
 
     return (
         <div className="d-flex flex-column mx-auto col-12 bg-dark align-items-center" style={{marginTop : '150px',height: '400px'}}>
-
+            <div className="card">
+                {
+                    err && (<h3 className="text-danger">*Please enter minimum and maximum amount and ensure that minimum is lesser than maximum</h3>)
+                }
+            </div>
             <div className="d-flex p-5">
                 <ul className="d-flex flex-row justify-content-between nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li className="nav-item" role="presentation">
@@ -106,6 +132,9 @@ function Home() {
                 residential={residential_buy} 
                 commercial={commercial_buy} 
                 by_the_day={false} 
+                setPref1Helper={setPref1Helper}
+                setPref2Helper={setPref2Helper}
+                setPriceHelper={setPriceHelper}
                 setSearchHelper={setSearchHelper}
                 setOptionHelper={setOptionHelper} 
                 addRoomToListHelper={addRoomToListHelper}/>)
@@ -117,6 +146,9 @@ function Home() {
                 residential={residential_take_off} 
                 commercial={commercial_take_off} 
                 by_the_day={false} 
+                setPref1Helper={setPref1Helper}
+                setPref2Helper={setPref2Helper}
+                setPriceHelper={setPriceHelper}
                 setSearchHelper={setSearchHelper}
                 setOptionHelper={setOptionHelper} 
                 addRoomToListHelper={addRoomToListHelper}/>)
@@ -127,7 +159,10 @@ function Home() {
                 option={'residential'}
                 residential={residential_by_the_day} 
                 commercial={[]} 
-                by_the_day={true} 
+                by_the_day={true}
+                setPref1Helper={setPref1Helper}
+                setPref2Helper={setPref2Helper}
+                setPriceHelper={setPriceHelper} 
                 setSearchHelper={setSearchHelper}
                 setOptionHelper={setOptionHelper} 
                 addRoomToListHelper={addRoomToListHelper}/>)
@@ -135,6 +170,8 @@ function Home() {
             {
                 selected === 4 && (
                 <Estimate 
+                setPriceHelper={setPriceHelper}
+                setPref1Helper={setPref1Helper}
                 setSearchHelper={setSearchHelper}
                 addRoomToListHelper={addRoomToListHelper}/>)
             }
@@ -142,6 +179,73 @@ function Home() {
             <button className="btn btn-primary btn-lg m-2" onClick={()=>go(search)}>
                 Search
             </button>
+            <div className="card p-3 m-4">
+                {
+                    ok && (
+                        <>
+                        <h3 className="p-3 m-3">Search Parameters</h3>
+                        <h5>{option.toUpperCase()}</h5>
+                        <hr/>
+                        <ul>
+                        {
+                            
+                            pref1.map(pref=>{
+                                return(
+                                    <li>
+                                        {pref}
+                                    </li>
+                                )
+                            })
+                        }
+                        </ul>
+                        <hr/>
+
+                        <ul>
+                        {
+                            selected !== 4 && (
+                                    pref2.map(pref=>{
+                                        return(
+                                            <li>
+                                                {pref}
+                                            </li>
+                                        )
+                                    })
+                            )
+                        }
+                        </ul>
+                        <hr/>
+
+                        <h5>Rooms Selected : {roomsSelected.length}</h5>
+                        <ul>
+                        {
+                            
+                            roomsSelected.map(room=>{
+                                return(
+                                    <li>
+                                        {room}
+                                    </li>
+                                )
+                            })
+                        }
+                        </ul>
+
+                        <hr/>
+
+                        <h5>Latitude : {coordinates['lat']}</h5>
+                        <h5>Longitude : {coordinates['lng']}</h5>
+                        <hr/>
+                        {
+                            selected !== 4 &&  (<h5>Minimum : {price['min']}</h5>)
+                        }
+                        {
+                            selected !== 4 && (<h5>Maximum : {price['max']}</h5>)
+                        }
+                        
+
+                        </>
+                    )
+                }
+            </div>
         </div>
     )
 }

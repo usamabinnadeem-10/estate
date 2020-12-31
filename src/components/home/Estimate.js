@@ -4,9 +4,10 @@ import Places from './Places'
 const rooms = ['1','2','3','4+']
 
 
-function Estimate({addRoomToListHelper, setSearchHelper}) {
+function Estimate({addRoomToListHelper, setSearchHelper,setPref1Helper}) {
 
     const [roomsSelected, setRoomsSelected] = useState([])
+    const [pref1, setPref1] = useState([])
 
 
     useEffect(()=>{
@@ -23,6 +24,42 @@ function Estimate({addRoomToListHelper, setSearchHelper}) {
         window.addEventListener('resize', handleResize)
     })
 
+    const choosePref1 = e => {
+        var isChecked = document.getElementById(e).checked
+        if (isChecked){
+            let temp = pref1
+            temp.push(e)
+            setPref1(temp)
+            setPref1Helper(temp)
+        }else{
+            const index = pref1.indexOf(e)
+            if(index > -1){
+                let temp = pref1
+                temp.splice(index,1)
+                setPref1(temp)
+                setPref1Helper(temp)
+            }
+        }
+    }
+
+    const addRoomToList = (e) => {
+        var isChecked = document.getElementById(e).checked
+        if (isChecked){
+            let temp = roomsSelected
+            temp.push(e)
+            setRoomsSelected(temp)
+            addRoomToListHelper(temp)
+        }else{
+            const index = roomsSelected.indexOf(e)
+            if(index > -1){
+                let temp = roomsSelected
+                temp.splice(index,1)
+                setRoomsSelected(temp)
+                addRoomToListHelper(temp)
+            }
+        } 
+    }
+
     return (
         <div className="card bg-light d-flex flex-row col-10 flex-wrap align-items-center">
 
@@ -34,13 +71,13 @@ function Estimate({addRoomToListHelper, setSearchHelper}) {
                 <ul id="dropdown-buy-1" className="dropdown-menu p-3" aria-labelledby="dropdownMenuButton">        
                     <li>
                         <div className="d-flex flex-row align-items-baseline px-3">
-                            <input className="" type="checkbox" id="apartment" name="apartment" value="apartment"/>
+                            <input onClick={(e)=>choosePref1(e.target.id)}  className="" type="checkbox" id="Apartment" name="apartment" value="apartment"/>
                             <h6 className="mx-2">Apartment</h6>
                         </div>
                     </li>
                     <li>
                         <div className="d-flex flex-row align-items-baseline px-3">
-                            <input className="" type="checkbox" id="lcd" name="lcd" value="lcd"/>
+                            <input onClick={(e)=>choosePref1(e.target.id)}  className="" type="checkbox" id="Lcd" name="lcd" value="lcd"/>
                             <h6 className="mx-2">Lcd</h6>
                         </div>
                     </li>
@@ -58,7 +95,7 @@ function Estimate({addRoomToListHelper, setSearchHelper}) {
                                 rooms.map(room=>{
                                     return(
                                         <div className="d-flex flex-row align-items-baseline px-3">
-                                            <input onClick={(e)=>addRoomToListHelper(e.target.id)} className="" type="checkbox" id={room} name={room} value={room}/>
+                                            <input onClick={(e)=>addRoomToList(e.target.id)}  className="" type="checkbox" id={room} name={room} value={room}/>
                                             <h6 className="mx-2">{room}</h6>
                                         </div>
                                     )

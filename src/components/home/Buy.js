@@ -4,12 +4,20 @@ import Places from './Places'
 const rooms = ['1','2','3','4','5','6+']
 
 
-function Buy({residential, commercial, by_the_day, setSearchHelper, setOptionHelper, addRoomToListHelper,option}) {
+function Buy({residential, commercial, by_the_day, 
+    setSearchHelper, setOptionHelper, option,
+    addRoomToListHelper, setPriceHelper,setPref1Helper, setPref2Helper}) {
 
-    // const [option, setOption] = useState('residential')
-    // const [roomsSelected, setRoomsSelected] = useState([])
+    const [optionLocal, setOptionLocal] = useState('')    
+    const [roomsSelected, setRoomsSelected] = useState([])
+    const [pref1, setPref1] = useState([])
+    const [pref2, setPref2] = useState([])
 
-
+    useEffect(()=>{
+        setPref1([])
+        setPref1Helper([])
+    },[optionLocal])
+        
     useEffect(()=>{
         function handleResize(){
             if(window.innerWidth < 520 && window.innerWidth > 320){
@@ -24,22 +32,59 @@ function Buy({residential, commercial, by_the_day, setSearchHelper, setOptionHel
         window.addEventListener('resize', handleResize)
     })
 
-    // const addRoomToList = (e) => {
-    //     var isChecked = document.getElementById(e).checked
-    //     console.log(isChecked)
-    //     if (isChecked){
-    //         let temp = roomsSelected
-    //         temp.push(e)
-    //         setRoomsSelected(temp)
-    //     }else{
-    //         const index = roomsSelected.indexOf(e)
-    //         if(index > -1){
-    //             let temp = roomsSelected
-    //             temp.splice(index,1)
-    //             setRoomsSelected(temp)
-    //         }
-    //     } 
-    // }
+    const addRoomToList = (e) => {
+        var isChecked = document.getElementById(e).checked
+        if (isChecked){
+            let temp = roomsSelected
+            temp.push(e)
+            setRoomsSelected(temp)
+            addRoomToListHelper(temp)
+        }else{
+            const index = roomsSelected.indexOf(e)
+            if(index > -1){
+                let temp = roomsSelected
+                temp.splice(index,1)
+                setRoomsSelected(temp)
+                addRoomToListHelper(temp)
+            }
+        } 
+    }
+
+    const choosePref1 = e => {
+        var isChecked = document.getElementById(e).checked
+        if (isChecked){
+            let temp = pref1
+            temp.push(e.substring(2, e.length))
+            setPref1(temp)
+            setPref1Helper(temp)
+        }else{
+            const index = pref1.indexOf(e.substring(2, e.length))
+            if(index > -1){
+                let temp = pref1
+                temp.splice(index,1)
+                setPref1(temp)
+                setPref1Helper(temp)
+            }
+        }
+    }
+
+    const choosePref2 = e => {
+        var isChecked = document.getElementById(e).checked
+        if (isChecked){
+            let temp = pref2
+            temp.push(e.substring(6, e.length))
+            setPref2(temp)
+            setPref2Helper(temp)
+        }else{
+            const index = pref1.indexOf(e.substring(6, e.length))
+            if(index > -1){
+                let temp = pref2
+                temp.splice(index,1)
+                setPref2(temp)
+                setPref2Helper(temp)
+            }
+        }
+    }
 
     
 
@@ -47,6 +92,7 @@ function Buy({residential, commercial, by_the_day, setSearchHelper, setOptionHel
         <div className="card bg-light d-flex flex-row col-10 flex-wrap align-items-center">
 
             <div className="dropdown bg-light ">
+
                 <button className="btn dropdown-toggle " type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     Apartment in a new building and secondary building
                 </button>
@@ -57,11 +103,30 @@ function Buy({residential, commercial, by_the_day, setSearchHelper, setOptionHel
                             <li>
                                 <div className="d-flex flex-row pt-2 px-3 pb-4">
                                     <div className="d-flex flex-row align-items-baseline p-2">
-                                        <input checked={option==='residential' ? 'checked' : ''} style={{width : '20px'}} onClick={()=>setOptionHelper('residential')} type="radio" id="residential" name="option" value="residential"/>
+                                        <input 
+                                        checked={option==='residential' ? 'checked' : ''} 
+                                        style={{width : '20px'}} 
+                                        onClick={()=>{
+                                            setOptionLocal('residential')
+                                            setOptionHelper('residential')
+                                        }} 
+                                        type="radio" 
+                                        id="residential" 
+                                        name="option" 
+                                        value="residential"/>
                                         <label for="residential">Residential</label>
                                     </div>
                                     <div className="d-flex flex-row align-items-baseline p-2">
-                                        <input checked={option==='commercial' ? 'checked' : ''} onClick={()=>setOptionHelper('commercial')} type="radio" id="commercial" name="option" value="commercial"/>
+                                        <input 
+                                        checked={option==='commercial' ? 'checked' : ''} 
+                                        onClick={()=>{
+                                            setOptionLocal('commercial')
+                                            setOptionHelper('commercial')
+                                        }} 
+                                        type="radio" 
+                                        id="commercial" 
+                                        name="option" 
+                                        value="commercial"/>
                                         <label for="commercial">Commercial</label>
                                     </div>
                                 </div>
@@ -74,9 +139,14 @@ function Buy({residential, commercial, by_the_day, setSearchHelper, setOptionHel
                             residential.map((row,index)=>{
                                 return(
                                     <>
-                                    <li>
+                                    <li key={'r-'+index}>
                                         <div className="d-flex flex-row align-items-baseline px-3">
-                                            <input className="" type="checkbox" id={row} name={row} value={row}/>
+                                            <input 
+                                            onClick={(e)=>choosePref1(e.target.id)} 
+                                            type="checkbox" 
+                                            id={'r-' + row} 
+                                            name={'r-' + row} 
+                                            value={'r-' + row}/>
                                             <h6 className="mx-2">{row}</h6>
                                         </div>
                                     </li>
@@ -88,11 +158,17 @@ function Buy({residential, commercial, by_the_day, setSearchHelper, setOptionHel
                             commercial.map((row,index)=>{
                                 return(
                                     <>
-                                    <li>
-                                    <div className="d-flex flex-row align-items-baseline px-3">
-                                        <input className="" type="checkbox" id={row} name={row} value={row}/>
-                                        <h6 className="mx-2">{row}</h6>
-                                    </div>
+                                    <li key={'c-'+index}>
+                                        <div className="d-flex flex-row align-items-baseline px-3">
+                                            <input 
+                                            onClick={(e)=>choosePref1(e.target.id)} 
+                                            className="" 
+                                            type="checkbox" 
+                                            id={'c-' + row} 
+                                            name={'c-' + row} 
+                                            value={'c-' + row}/>
+                                            <h6 className="mx-2">{row}</h6>
+                                        </div>
                                     </li>
                                     { (index == 10) ? <hr></hr> : null }
                                     </>
@@ -100,7 +176,6 @@ function Buy({residential, commercial, by_the_day, setSearchHelper, setOptionHel
                             })
                         )
                     }
-                    
                 </ul>
             </div>
 
@@ -114,8 +189,14 @@ function Buy({residential, commercial, by_the_day, setSearchHelper, setOptionHel
                             {
                                 rooms.map(room=>{
                                     return(
-                                        <div className="d-flex flex-row align-items-baseline px-3">
-                                            <input onClick={(e)=>addRoomToListHelper(e.target.id)} className="" type="checkbox" id={room} name={room} value={room}/>
+                                        <div className="d-flex flex-row align-items-baseline px-3" key={room}>
+                                            <input 
+                                            onClick={(e)=>addRoomToList(e.target.id)} 
+                                            className="" 
+                                            type="checkbox" 
+                                            id={room} 
+                                            name={room} 
+                                            value={room}/>
                                             <h6 className="mx-2">{room}</h6>
                                         </div>
                                     )
@@ -125,13 +206,13 @@ function Buy({residential, commercial, by_the_day, setSearchHelper, setOptionHel
                     </li>
                     <li>
                         <div className="d-flex flex-row align-items-baseline px-3">
-                            <input className="" type="checkbox" />
+                            <input onClick={(e)=>choosePref2(e.target.id)} className="" type="checkbox" id="pref2-Studio" name="pref2-Studio" value="pref2-Studio"/>
                             <h6 className="mx-2">Studio</h6>
                         </div>
                     </li>
                     <li>
                         <div className="d-flex flex-row align-items-baseline px-3">
-                            <input className="" type="checkbox" />
+                            <input onClick={(e)=>choosePref2(e.target.id)} className="" type="checkbox" id="pref2-Free Layout" name="pref2-Free Layout" value="pref2-Free Layout" />
                             <h6 className="mx-2">Free layout</h6>
                         </div>
                     </li>
@@ -145,8 +226,8 @@ function Buy({residential, commercial, by_the_day, setSearchHelper, setOptionHel
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li>
                         <div className="d-flex flex-column pt-2 px-3 pb-4">
-                            <input className="input-group p-1 mx-2 my-2" style={{width : '100px'}} type="number" placeholder="minimum" min="0"></input>
-                            <input className="input-group p-1 mx-2 my-2" style={{width : '100px'}} type="number" placeholder="maximum" min="0"></input>
+                            <input onChange={(e)=>setPriceHelper(e.target.value, 'min')} className="input-group p-1 mx-2 my-2" style={{width : '100px'}} type="number" placeholder="minimum" min="0"></input>
+                            <input onChange={(e)=>setPriceHelper(e.target.value, 'max')} className="input-group p-1 mx-2 my-2" style={{width : '100px'}} type="number" placeholder="maximum" min="0"></input>
                         </div>
                     </li>
                 </ul>

@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom';
 
 function Header() {
     return (
@@ -9,13 +10,16 @@ function Header() {
           </div>
           <div className="container col-6 d-flex flex-row justify-content-end ">
             <button className="px-3 py-0 mx-2 btn btn-light fw-bold">
-              Button 1
+              <Link class="nav-link px-4" to="/">Home<span class="sr-only"></span></Link>
             </button>
             <button className="px-3 py-0 mx-2 btn btn-light fw-bold">
-              Button 2
+              <Link class="nav-link px-4" to="/post-ad">Post Ad<span class="sr-only"></span></Link>
             </button>
             <button className="px-3 py-0 mx-2 btn btn-light fw-bold"> 
-              Button 3
+              <Link class="nav-link px-4" to="/login">Login<span class="sr-only"></span></Link>
+            </button>
+            <button className="px-3 py-0 mx-2 btn btn-light fw-bold"> 
+              <Link class="nav-link px-4" to="/signup">Sign Up<span class="sr-only"></span></Link>
             </button>
           </div>
         </div>

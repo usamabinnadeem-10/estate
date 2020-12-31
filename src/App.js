@@ -6,6 +6,8 @@ import Login from './components/auth/Login'
 import SignUp from './components/auth/SignUp'
 import Home from './components/home/Home'
 import MapSearch from './components/mapSearch/MapSearch'
+import {Switch, Route, Redirect} from 'react-router-dom';
+
 
 const dummyAds = [
   {
@@ -49,7 +51,22 @@ function App() {
   return (
     <div className="container-fluid p-0">
       <Header/>
-      <Home/>
+      <Switch>
+        <Route exact path='/' component={Home}>
+          <Home/>
+        </Route>
+        <Route exact path='/login' component={Login}>
+          <Login/>
+        </Route>
+        <Route exact path='/signup' component={SignUp}>
+          <SignUp/>
+        </Route>
+        <Route exact path='/post-ad' component={Ad}>
+          <Ad/>
+        </Route>
+        
+      </Switch>
+      
       {/* <div className="mb-4 d-flex flex-column" style={{marginTop : '120px'}}>
         <h2 className="col-10 mx-auto my-4">Map Search</h2>
         <MapSearch
