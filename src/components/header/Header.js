@@ -55,6 +55,9 @@ function Header() {
             <button id="menu-item" className="menu-item col-md-2 col-8 px-3 py-0 mx-2 my-1 btn btn-light fw-bold">
               <Link class="nav-link" to="/post-ad">Post Ad<span class="sr-only"></span></Link>
             </button>
+            <button id="menu-item" className="menu-item col-md-2 col-8 px-3 py-0 mx-2 my-1 btn btn-light fw-bold">
+              <Link class="nav-link" to="/map-search">Map Search<span class="sr-only"></span></Link>
+            </button>
             <button id="menu-item" className="menu-item col-md-2 col-8 px-3 py-0 mx-2 my-1 btn btn-light fw-bold"> 
               <Link class="nav-link" to="/login">Login<span class="sr-only"></span></Link>
             </button>

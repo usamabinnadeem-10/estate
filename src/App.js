@@ -64,6 +64,16 @@ function App() {
         <Route exact path='/post-ad' component={Ad}>
           <Ad/>
         </Route>
+        <Route exact path='/map-search' component={MapSearch}>
+        <div className="mb-4 d-flex flex-column" style={{marginTop : '350px'}}>
+        <h2 className="col-10 mx-auto my-4">Map Search</h2>
+        <MapSearch
+          center={{ lat: 40.6451594, lng: -74.0850826 }}
+          zoom={10}
+          places={dummyAds}
+        />
+      </div>
+        </Route>
         
       </Switch>
       
