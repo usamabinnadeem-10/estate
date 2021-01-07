@@ -7,6 +7,8 @@ import SignUp from "./components/auth/SignUp";
 import Home from "./components/home/Home";
 import MapSearch from "./components/mapSearch/MapSearch";
 import AdPage from "./components/adPage/AdPage";
+import NewsPage from "./components/home/NewsPage";
+import NewsCreate from "./components/news/NewsCreate";
 
 import { Switch, Route, Redirect } from "react-router-dom";
 
@@ -66,6 +68,12 @@ function App() {
         </Route>
         <Route exact path="/Ad/:id" component={AdPage}>
           <AdPage />
+        </Route>
+        <Route exact path="/news-article/:id" component={NewsPage}>
+          <NewsPage />
+        </Route>
+        <Route exact path="/create-news" component={NewsCreate}>
+          <NewsCreate />
         </Route>
 
         <Route exact path="/map-search" component={MapSearch}>

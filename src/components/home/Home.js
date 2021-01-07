@@ -5,6 +5,7 @@ import Estimate from "./Estimate";
 import Geocode from "react-geocode";
 
 import AdBox from "./AdBox";
+import News from "./News";
 
 import {
   residential_buy,
@@ -28,6 +29,7 @@ function Home() {
   const [pref2, setPref2] = useState([]);
   const [ok, setOk] = useState(false);
   const [err, setErr] = useState(false);
+  const [pill, setPill] = useState(1);
 
   const setOptionHelper = (option) => {
     setOption(option);
@@ -94,6 +96,10 @@ function Home() {
   const imgs = [
     "https://specials-images.forbesimg.com/imageserve/1026205392/960x0.jpg?fit=scale",
     "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/modern-house-2-1538579843.jpg?crop=1.00xw:0.731xh;0,0.264xh&resize=980:*",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Tiny_house%2C_Portland.jpg/800px-Tiny_house%2C_Portland.jpg",
+  ];
+
+  const imgs2 = [
     "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Tiny_house%2C_Portland.jpg/800px-Tiny_house%2C_Portland.jpg",
   ];
 
@@ -234,50 +240,177 @@ function Home() {
           Search
         </button>
       </div>
+      <div className="col-10 mx-auto my-3">
+        <ul
+          className="d-flex flex-row nav nav-pills mb-3 justify-content-center"
+          id="pills-tab"
+          role="tablist"
+        >
+          <li className="nav-item" role="presentation">
+            <a
+              className="nav-link active"
+              id="pills-home-tab"
+              data-bs-toggle="pill"
+              href="#pills-home"
+              role="tab"
+              aria-controls="pills-home"
+              aria-selected="true"
+            >
+              Residential
+            </a>
+          </li>
+          <li className="nav-item" role="presentation">
+            <a
+              className="nav-link"
+              id="pills-profile-tab"
+              data-bs-toggle="pill"
+              href="#pills-profile"
+              role="tab"
+              aria-controls="pills-profile"
+              aria-selected="false"
+            >
+              Suburban
+            </a>
+          </li>
+          <li className="nav-item" role="presentation">
+            <a
+              className="nav-link"
+              id="pills-contact-tab"
+              data-bs-toggle="pill"
+              href="#pills-contact"
+              role="tab"
+              aria-controls="pills-contact"
+              aria-selected="false"
+            >
+              Commercial
+            </a>
+          </li>
+          <li className="nav-item" role="presentation">
+            <a
+              className="nav-link"
+              id="pills-contact-tab"
+              data-bs-toggle="pill"
+              href="#pills-contact"
+              role="tab"
+              aria-controls="pills-contact"
+              aria-selected="false"
+            >
+              Daily
+            </a>
+          </li>
+        </ul>
+      </div>
 
-      <div className="col-12 col-sm-10 d-flex flex-row flex-wrap mx-auto justify-content-evenly mt-5">
-        <AdBox
-          images={imgs}
-          price={12345678}
-          rooms={3}
-          area={50}
-          location={"Street 10"}
-        />
-        <AdBox
-          images={imgs}
-          price={12345678}
-          rooms={3}
-          area={50}
-          location={"Street 10"}
-        />
-        <AdBox
-          images={imgs}
-          price={12345678}
-          rooms={3}
-          area={50}
-          location={"Street 10"}
-        />
-        <AdBox
-          images={imgs}
-          price={12345678}
-          rooms={3}
-          area={50}
-          location={"Street 10"}
-        />
-        <AdBox
-          images={imgs}
-          price={12345678}
-          rooms={3}
-          area={50}
-          location={"Street 10"}
-        />
-        <AdBox
-          images={imgs}
-          price={12345678}
-          rooms={3}
-          area={50}
-          location={"Street 10"}
-        />
+      <div className="d-flex flex-row col-12">
+        <div className="d-flex flex-column col-8">
+          <h2 className="col-11 mx-auto">
+            <u>Premium Ads</u>
+          </h2>
+          <div className="card col-11 d-flex flex-row flex-wrap mx-auto justify-content-evenly mt-5">
+            <AdBox
+              images={imgs}
+              price={12345678}
+              rooms={3}
+              area={50}
+              location={"Street 10"}
+            />
+            <AdBox
+              images={imgs2}
+              price={12345678}
+              rooms={3}
+              area={50}
+              location={"Street 10"}
+            />
+            <AdBox
+              images={imgs}
+              price={12345678}
+              rooms={3}
+              area={50}
+              location={"Street 10"}
+            />
+            <AdBox
+              images={imgs2}
+              price={12345678}
+              rooms={3}
+              area={50}
+              location={"Street 10"}
+            />
+          </div>
+          <div className="card col-11 d-flex flex-row flex-wrap mx-auto justify-content-evenly mt-5">
+            <AdBox
+              images={imgs}
+              price={12345678}
+              rooms={3}
+              area={50}
+              location={"Street 10"}
+            />
+            <AdBox
+              images={imgs}
+              price={12345678}
+              rooms={3}
+              area={50}
+              location={"Street 10"}
+            />
+            <AdBox
+              images={imgs}
+              price={12345678}
+              rooms={3}
+              area={50}
+              location={"Street 10"}
+            />
+            <AdBox
+              images={imgs}
+              price={12345678}
+              rooms={3}
+              area={50}
+              location={"Street 10"}
+            />
+            <AdBox
+              images={imgs}
+              price={12345678}
+              rooms={3}
+              area={50}
+              location={"Street 10"}
+            />
+            <AdBox
+              images={imgs}
+              price={12345678}
+              rooms={3}
+              area={50}
+              location={"Street 10"}
+            />
+          </div>
+        </div>
+        <div className="d-flex flex-column col-4">
+          <h2 className="col-10 mx-auto">
+            <u>News</u>
+          </h2>
+          <div className="d-flex flex-column card col-10 mx-auto mt-5">
+            <div className="px-2 py-3">
+              <News
+                title={"10 worst districts of Moscow"}
+                brief={
+                  "In the course of a sample survey, the respondents - more than 4 thousand people - were asked to assess"
+                }
+                detail={
+                  "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum "
+                }
+                author={"Mr.Henry"}
+              />
+
+              <News
+                title={"11 best ditricts of Moscow"}
+                brief={
+                  "In the course of a sample survey, the respondents - more than 4 thousand people - were asked to assess"
+                }
+                detail={
+                  "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum "
+                }
+                author={"Ms.Shaw"}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -32,15 +32,17 @@ function MyCarousel(props) {
   };
 
   return (
-    <div className="col-12">
-      <Carousel value={value} slides={slides} onChange={onChange} />
-      <Dots
-        number={thumbnails.length}
-        thumbnails={thumbnails}
-        value={value}
-        onChange={onChange}
-        number={slides.length}
-      />
+    <div className="card col-6 p-3" style={{ height: "404px" }}>
+      <div className="col-12">
+        <Carousel value={value} slides={slides} onChange={onChange} />
+        <Dots
+          number={thumbnails.length}
+          thumbnails={thumbnails}
+          value={value}
+          onChange={onChange}
+          number={slides.length}
+        />
+      </div>
     </div>
   );
 }
