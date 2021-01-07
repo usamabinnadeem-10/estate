@@ -9,6 +9,7 @@ import MapSearch from "./components/mapSearch/MapSearch";
 import AdPage from "./components/adPage/AdPage";
 import NewsPage from "./components/home/NewsPage";
 import NewsCreate from "./components/news/NewsCreate";
+import Profile from "./components/userProfile/Profile";
 
 import { Switch, Route, Redirect } from "react-router-dom";
 
@@ -74,6 +75,9 @@ function App() {
         </Route>
         <Route exact path="/create-news" component={NewsCreate}>
           <NewsCreate />
+        </Route>
+        <Route exact path="/my" component={Profile}>
+          <Profile />
         </Route>
 
         <Route exact path="/map-search" component={MapSearch}>
