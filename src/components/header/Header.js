@@ -44,7 +44,7 @@ function Header() {
             height={50}
             icon={right}
             color={"white"}
-            onClick={() => setOpenPanel(true)}
+            onMouseOver={() => setOpenPanel(true)}
           />
         </div>
         <SlidingPanel type={"left"} isOpen={openPanel} size={15}>
@@ -52,16 +52,19 @@ function Header() {
             className="bg-dark d-flex flex-column"
             style={{ height: "100%" }}
           >
-            <div className="text-center my-2">
+            <div className="text-end">
               <Icon
-                width={70}
-                height={70}
+                width={25}
+                height={25}
                 icon={close}
                 color={"white"}
                 onClick={() => setOpenPanel(false)}
               />
             </div>
-            <table className="table table-dark table-hover text-white py-3 my-3">
+            <table
+              className="table table-dark table-hover text-white py-3 my-3"
+              onClick={() => setOpenPanel(false)}
+            >
               <tbody>
                 <tr className="text-center" style={{ height: "50px" }}>
                   <td>

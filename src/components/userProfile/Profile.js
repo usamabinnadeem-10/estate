@@ -24,7 +24,7 @@ function Profile() {
             </tr>
             <tr>
               <th>Contact</th>
-              <td>Mr. Shaw</td>
+              <td>03000000000</td>
             </tr>
           </tbody>
         </table>
