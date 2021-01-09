@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { metros } from "./data";
 import { cities } from "./data";
 import MyGoogleMap from "./mapLogic/MyGoogleMap";
@@ -12,12 +12,19 @@ function LocationBox(props) {
   const [current_city, setCurrent_city] = useState("");
   const [is_city_set, setIs_city_set] = useState(false);
 
+  useEffect(() => {
+    props.setState("metro", current_metro);
+  }, [current_metro]);
+
+  useEffect(() => {
+    props.setState("city", current_city);
+  }, [current_city]);
+
   const setMetro = (metro) => {
     setCurrent_metro(metro);
     setIs_metro_set(true);
     setIs_city_set(false);
     setCurrent_city("");
-    props.setState("metro", current_metro);
 
     if (metro === "Saint-Petersburg") {
       setCurrent_city_list(cities["Saint_Petersburg"]);
@@ -39,7 +46,6 @@ function LocationBox(props) {
   const setCity = (city) => {
     setCurrent_city(city);
     setIs_city_set(true);
-    props.setState("city", city);
   };
 
   const filterItems = (term) => {
@@ -165,6 +171,7 @@ function LocationBox(props) {
                 className="col-5"
                 placeholder="Price"
                 type="number"
+                min="0"
               ></input>
               <select
                 onClick={(e) => {
@@ -174,6 +181,7 @@ function LocationBox(props) {
                 name="currency"
                 id="currency"
               >
+                <option value="">Select Currency</option>
                 <option value="1">RUB</option>
                 <option value="2">EURO</option>
                 <option value="3">USD</option>
@@ -188,6 +196,7 @@ function LocationBox(props) {
                   }
                   placeholder="total area in m2"
                   type="number"
+                  min="0"
                 ></input>
               </div>
             </div>

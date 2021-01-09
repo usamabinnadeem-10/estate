@@ -45,7 +45,6 @@ function SellerInfo(props) {
           onChange={onChange}
         />
       </Wrapper>
-      <button className="btn m-3 p-2 btn-lg btn-success col-6">Publish</button>
     </div>
   );
 }

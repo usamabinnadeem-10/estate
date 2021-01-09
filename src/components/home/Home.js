@@ -107,7 +107,7 @@ function Home() {
     <div className="d-flex flex-column">
       <div
         className="d-flex flex-column mx-auto col-12 bg-dark align-items-center"
-        style={{ marginTop: "250px", height: "400px" }}
+        style={{ marginTop: "67px", height: "400px" }}
       >
         {err && (
           <div className="card col-8">
@@ -306,109 +306,15 @@ function Home() {
           <h2 className="col-11 mx-auto">
             <u>Premium Ads</u>
           </h2>
-          <div className="card col-11 d-flex flex-row flex-wrap mx-auto justify-content-evenly mt-5">
-            <AdBox
-              images={imgs}
-              price={12345678}
-              rooms={3}
-              area={50}
-              location={"Street 10"}
-            />
-            <AdBox
-              images={imgs2}
-              price={12345678}
-              rooms={3}
-              area={50}
-              location={"Street 10"}
-            />
-            <AdBox
-              images={imgs}
-              price={12345678}
-              rooms={3}
-              area={50}
-              location={"Street 10"}
-            />
-            <AdBox
-              images={imgs2}
-              price={12345678}
-              rooms={3}
-              area={50}
-              location={"Street 10"}
-            />
-          </div>
-          <div className="card col-11 d-flex flex-row flex-wrap mx-auto justify-content-evenly mt-5">
-            <AdBox
-              images={imgs}
-              price={12345678}
-              rooms={3}
-              area={50}
-              location={"Street 10"}
-            />
-            <AdBox
-              images={imgs}
-              price={12345678}
-              rooms={3}
-              area={50}
-              location={"Street 10"}
-            />
-            <AdBox
-              images={imgs}
-              price={12345678}
-              rooms={3}
-              area={50}
-              location={"Street 10"}
-            />
-            <AdBox
-              images={imgs}
-              price={12345678}
-              rooms={3}
-              area={50}
-              location={"Street 10"}
-            />
-            <AdBox
-              images={imgs}
-              price={12345678}
-              rooms={3}
-              area={50}
-              location={"Street 10"}
-            />
-            <AdBox
-              images={imgs}
-              price={12345678}
-              rooms={3}
-              area={50}
-              location={"Street 10"}
-            />
-          </div>
+          <div className="card col-11 d-flex flex-row flex-wrap mx-auto justify-content-evenly mt-5"></div>
+          <div className="card col-11 d-flex flex-row flex-wrap mx-auto justify-content-evenly mt-5"></div>
         </div>
         <div className="d-flex flex-column col-4">
           <h2 className="col-10 mx-auto">
             <u>News</u>
           </h2>
           <div className="d-flex flex-column card col-10 mx-auto mt-5">
-            <div className="px-2 py-3">
-              <News
-                title={"10 worst districts of Moscow"}
-                brief={
-                  "In the course of a sample survey, the respondents - more than 4 thousand people - were asked to assess"
-                }
-                detail={
-                  "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum "
-                }
-                author={"Mr.Henry"}
-              />
-
-              <News
-                title={"11 best ditricts of Moscow"}
-                brief={
-                  "In the course of a sample survey, the respondents - more than 4 thousand people - were asked to assess"
-                }
-                detail={
-                  "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum "
-                }
-                author={"Ms.Shaw"}
-              />
-            </div>
+            <div className="px-2 py-3"></div>
           </div>
         </div>
       </div>

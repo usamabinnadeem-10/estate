@@ -4,6 +4,7 @@ function FeatureBox(props) {
   const [a1, setA1] = useState([]);
   const [a2, setA2] = useState([]);
   const [a3, setA3] = useState([]);
+  const [roomsParam, setRoomsParam] = useState([]);
 
   const feature1 = [
     "Furniture",
@@ -43,6 +44,8 @@ function FeatureBox(props) {
     "Rural Area",
   ];
 
+  const roomArray = ["Studio", "Free layout"];
+
   function removeItemOnce(arr, value) {
     var index = arr.indexOf(value);
     if (index > -1) {
@@ -59,6 +62,8 @@ function FeatureBox(props) {
       tempArray = a2;
     } else if (array === 3) {
       tempArray = a3;
+    } else if (array === 4) {
+      tempArray = roomsParam;
     }
 
     const found = tempArray.find((elem) => elem === val);
@@ -71,6 +76,8 @@ function FeatureBox(props) {
         setA2(filteredArray);
       } else if (array === 3) {
         setA3(filteredArray);
+      } else if (array === 4) {
+        setRoomsParam(filteredArray);
       }
     } else {
       tempArray.push(val);
@@ -80,6 +87,8 @@ function FeatureBox(props) {
         setA2(tempArray);
       } else if (array === 3) {
         setA3(tempArray);
+      } else if (array === 4) {
+        setRoomsParam(tempArray);
       }
     }
   };
@@ -96,8 +105,40 @@ function FeatureBox(props) {
     props.setState("feature3", a3);
   }, [a3]);
 
+  useEffect(() => {
+    props.setState("roomsParams", roomsParam);
+  }, [roomsParam]);
+
   return (
     <div className="d-flex flex-column card p-3 mt-3 col-lg-5 col-12">
+      <div className="d-flex flex-column card p-3 my-2">
+        <h3 className="text-muted">Rooms</h3>
+        <input
+          onChange={(e) => props.setState("rooms", parseInt(e.target.value))}
+          id="property-floor"
+          type="number"
+          placeholder="Rooms"
+          className="p-2"
+          min="0"
+        ></input>
+        <div className="d-flex flex-row flex-wrap m-2 p-1">
+          {roomArray.map((feature) => {
+            return (
+              <div className="col-12 col-sm-6 d-flex flex-row align-items-baseline p-1">
+                <input
+                  onClick={(e) => shouldAdd(e.target.value, 4)}
+                  className=""
+                  type="checkbox"
+                  id={feature}
+                  name={feature}
+                  value={feature}
+                />
+                <h6 className="mx-2">{feature}</h6>
+              </div>
+            );
+          })}
+        </div>
+      </div>
       <div className="d-flex flex-column card p-3 my-2">
         <h3 className="text-muted">Feature No.1</h3>
         <div className="d-flex flex-row">

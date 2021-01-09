@@ -39,6 +39,7 @@ function GeneralBox(props) {
   useEffect(() => {
     setParameters([]);
     props.setState("parameters", []);
+    props.setState("propertyType", propertyType);
   }, [propertyType]);
 
   function removeItemOnce(arr, value) {
@@ -87,7 +88,7 @@ function GeneralBox(props) {
             id="property-type"
             className=""
           >
-            <option value="select">Select a category</option>
+            <option value="">Select a category</option>
             <option value="1">Residential Property</option>
             <option value="2">Country Estate</option>
             <option value="3">Commercial Property</option>
