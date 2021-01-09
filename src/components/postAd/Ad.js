@@ -12,34 +12,27 @@ function Ad() {
     latitude: "",
     longitude: "",
     address: "",
-
     metro: "",
     city: "",
     price: 0.0,
     currency: "",
     area: 0.0,
-
     propertyType: "",
     adType: "",
     fromType: "",
     title: "",
     description: "",
     parameters: [],
-
     rooms: 0,
     roomsParams: [],
     floor: 0,
     floors: 0,
     feature1: [],
-
     livingSpace: 0.0,
     parking: "",
     feature2: [],
-
     feature3: [],
-
     images: [],
-
     name: "",
     email: "",
   });
@@ -82,16 +75,12 @@ function Ad() {
       }
     }
 
-    console.log(error_temp);
-
     let floorOkay = true;
     let spaceOkay = true;
 
     if (!error_temp) {
       floorOkay = ad["floor"] <= ad["floors"];
       spaceOkay = ad["livingSpace"] <= ad["area"];
-      console.log(floorOkay);
-      console.log(spaceOkay);
       if (floorOkay && spaceOkay) {
         // axios
         setError(false);
@@ -117,7 +106,7 @@ function Ad() {
   return (
     <div
       className="d-flex flex-column mx-auto col-10"
-      style={{ marginTop: "350px" }}
+      style={{ marginTop: "100px" }}
     >
       <div className="d-flex flex-column" style={{ margin: "10px 50px" }}>
         <h2>Post Ad</h2>

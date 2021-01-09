@@ -13,44 +13,15 @@ import Profile from "./components/userProfile/Profile";
 
 import { Switch, Route, Redirect } from "react-router-dom";
 
-const dummyAds = [
-  {
-    id: 1,
-    name: "Park Slope",
-    price: 90000,
-    img: [
-      "https://specials-images.forbesimg.com/imageserve/1026205392/960x0.jpg?fit=scale",
-      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/modern-house-2-1538579843.jpg?crop=1.00xw:0.731xh;0,0.264xh&resize=980:*",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Tiny_house%2C_Portland.jpg/800px-Tiny_house%2C_Portland.jpg",
-    ],
-    latitude: "40.6710729",
-    longitude: "-73.9988001",
-  },
-  {
-    id: 2,
-    name: "Bushwick",
-    price: 40000,
-    img: [
-      "https://specials-images.forbesimg.com/imageserve/1026205392/960x0.jpg?fit=scale",
-      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/modern-house-2-1538579843.jpg?crop=1.00xw:0.731xh;0,0.264xh&resize=980:*",
-    ],
-    latitude: "40.6942861",
-    longitude: "-73.9389312",
-  },
-  {
-    id: 3,
-    name: "East New York",
-    price: 70000,
-    img: [
-      "https://specials-images.forbesimg.com/imageserve/1026205392/960x0.jpg?fit=scale",
-      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/modern-house-2-1538579843.jpg?crop=1.00xw:0.731xh;0,0.264xh&resize=980:*",
-    ],
-    latitude: "40.6577799",
-    longitude: "-73.9147716",
-  },
-];
-
 function App() {
+  const [user, setUser] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const loginHelper = (data) => {
+    setUser(data);
+    setLoggedIn(true);
+  };
+
   return (
     <div className="container-fluid p-0">
       <Header />
@@ -58,39 +29,54 @@ function App() {
         <Route exact path="/" component={Home}>
           <Home />
         </Route>
-        <Route exact path="/login" component={Login}>
-          <Login />
-        </Route>
-        <Route exact path="/signup" component={SignUp}>
-          <SignUp />
-        </Route>
-        <Route exact path="/post-ad" component={Ad}>
-          <Ad />
-        </Route>
+        {!loggedIn && (
+          <Route exact path="/login" component={Login}>
+            <Login login={loginHelper} />
+          </Route>
+        )}
+
+        {!loggedIn && (
+          <Route exact path="/signup" component={SignUp}>
+            <SignUp />
+          </Route>
+        )}
+
+        {loggedIn && (
+          <Route exact path="/post-ad" component={Ad}>
+            <Ad />
+          </Route>
+        )}
+
         <Route exact path="/Ad/:id" component={AdPage}>
           <AdPage />
         </Route>
         <Route exact path="/news-article/:id" component={NewsPage}>
           <NewsPage />
         </Route>
-        <Route exact path="/create-news" component={NewsCreate}>
-          <NewsCreate />
-        </Route>
-        <Route exact path="/my" component={Profile}>
-          <Profile />
-        </Route>
+
+        {loggedIn && (
+          <Route exact path="/create-news" component={NewsCreate}>
+            <NewsCreate />
+          </Route>
+        )}
+
+        {loggedIn && (
+          <Route exact path="/my" component={Profile}>
+            <Profile />
+          </Route>
+        )}
 
         <Route exact path="/map-search" component={MapSearch}>
           <div
             className="mb-4 d-flex flex-column"
-            style={{ marginTop: "350px" }}
+            style={{ marginTop: "100px" }}
           >
             <h2 className="col-10 mx-auto my-4">Map Search</h2>
-            <MapSearch
+            {/* <MapSearch
               center={{ lat: 40.6451594, lng: -74.0850826 }}
               zoom={10}
               places={dummyAds}
-            />
+            /> */}
           </div>
         </Route>
       </Switch>
