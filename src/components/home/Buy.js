@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Places from "./Places";
 
-const rooms = ["1", "2", "3", "4", "5", "6+"];
+const rooms = ["1", "2", "3", "4", "5", "6"];
 
 function Buy({
   residential,
@@ -91,7 +91,7 @@ function Buy({
       setPref2(temp);
       setPref2Helper(temp);
     } else {
-      const index = pref1.indexOf(e.substring(6, e.length));
+      const index = pref2.indexOf(e.substring(6, e.length));
       if (index > -1) {
         let temp = pref2;
         temp.splice(index, 1);
@@ -250,9 +250,9 @@ function Buy({
                 onClick={(e) => choosePref2(e.target.id)}
                 className=""
                 type="checkbox"
-                id="pref2-Free Layout"
-                name="pref2-Free Layout"
-                value="pref2-Free Layout"
+                id="pref2-Free layout"
+                name="pref2-Free layout"
+                value="pref2-Free layout"
               />
               <h6 className="mx-2">Free layout</h6>
             </div>

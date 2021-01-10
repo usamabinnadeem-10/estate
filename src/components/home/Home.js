@@ -6,6 +6,8 @@ import Geocode from "react-geocode";
 
 import AdBox from "./AdBox";
 import News from "./News";
+import axios from "axios";
+import { URL } from "../../URL";
 
 import {
   residential_buy,
@@ -27,7 +29,7 @@ function Home(props) {
   });
   const [pref1, setPref1] = useState([]);
   const [pref2, setPref2] = useState([]);
-  const [ok, setOk] = useState(false);
+
   const [err, setErr] = useState(false);
   const [pill, setPill] = useState(1);
 
@@ -60,9 +62,31 @@ function Home(props) {
     return false;
   };
 
+  const buildParams = () => {
+    let query = "";
+    query += "selected=" + selected + "&";
+    query += "option=" + option + "&";
+    query += "min=" + price.min + "&";
+    query += "max=" + price.max + "&";
+
+    roomsSelected.forEach((element) => {
+      query += "roomsSelected=" + element + "&";
+    });
+    pref1.forEach((element) => {
+      query += "pref1=" + element + "&";
+    });
+    pref2.forEach((element) => {
+      query += "pref2=" + element + "&";
+    });
+    return query;
+  };
+
   const go = (address) => {
     if (isPriceOk()) {
-      setOk(true);
+      const query = buildParams();
+      axios.get(URL + "api/search/?" + query).then((res) => {
+        props.search(res.data);
+      });
       setErr(false);
     } else {
       setErr(true);
@@ -302,6 +326,7 @@ function Home(props) {
               return (
                 <AdBox
                   ad={ad}
+                  price={ad.price}
                   images={ad.images}
                   rooms={ad.rooms}
                   area={ad.area}

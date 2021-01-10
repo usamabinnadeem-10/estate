@@ -26,6 +26,10 @@ function App() {
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
 
+  const searchAds = (ads) => {
+    setAllAds(ads);
+  };
+
   const loginHelper = (data) => {
     setUser(data);
     setLoggedIn(true);
@@ -64,7 +68,7 @@ function App() {
       <Header loggedIn={loggedIn} logout={logoutHelper} />
       <Switch>
         <Route exact path="/" component={Home}>
-          <Home ads={allAds} />
+          <Home ads={allAds} search={searchAds} />
         </Route>
         {!loggedIn && (
           <Route exact path="/login" component={Login}>
