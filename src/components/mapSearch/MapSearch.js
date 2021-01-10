@@ -92,11 +92,11 @@ const MapSearch = compose(
                       {place.img.map((img, index) => {
                         return index == 0 ? (
                           <div className="carousel-item active">
-                            <img src={img} className="d-block w-100" />
+                            <img src={img.file} className="d-block w-100" />
                           </div>
                         ) : (
                           <div className="carousel-item">
-                            <img src={img} className="d-block w-100" />
+                            <img src={img.file} className="d-block w-100" />
                           </div>
                         );
                       })}

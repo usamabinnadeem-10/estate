@@ -39,7 +39,7 @@ function GeneralBox(props) {
   useEffect(() => {
     setParameters([]);
     props.setState("parameters", []);
-    props.setState("propertyType", propertyType);
+    props.setState("property_type", propertyType);
   }, [propertyType]);
 
   function removeItemOnce(arr, value) {
@@ -82,7 +82,7 @@ function GeneralBox(props) {
           <select
             onClick={(e) => {
               setPropertyType(e.target.value);
-              props.setState("propertyType", propertyType);
+              props.setState("property_type", propertyType);
             }}
             name="property-type"
             id="property-type"
@@ -104,7 +104,7 @@ function GeneralBox(props) {
             <div className="d-flex flex-row">
               <div className="me-3">
                 <input
-                  onClick={() => props.setState("adType", "1")}
+                  onClick={() => props.setState("ad_type", "1")}
                   type="radio"
                   id="male"
                   name="type"
@@ -114,7 +114,7 @@ function GeneralBox(props) {
               </div>
               <div className="me-3">
                 <input
-                  onClick={() => props.setState("adType", "2")}
+                  onClick={() => props.setState("ad_type", "2")}
                   type="radio"
                   id="female"
                   name="type"
@@ -131,7 +131,7 @@ function GeneralBox(props) {
             <div className="d-flex flex-row">
               <div className="me-3">
                 <input
-                  onClick={() => props.setState("fromType", "1")}
+                  onClick={() => props.setState("from_type", "1")}
                   type="radio"
                   id="male"
                   name="from"
@@ -141,7 +141,7 @@ function GeneralBox(props) {
               </div>
               <div className="me-3">
                 <input
-                  onClick={() => props.setState("fromType", "2")}
+                  onClick={() => props.setState("from_type", "2")}
                   type="radio"
                   id="female"
                   name="from"

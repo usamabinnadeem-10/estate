@@ -1,5 +1,5 @@
 import axios from "axios";
-import URL from "../URL";
+import { URL } from "../URL";
 const axiosApiInstance = axios.create();
 
 axiosApiInstance.interceptors.response.use(
@@ -8,7 +8,7 @@ axiosApiInstance.interceptors.response.use(
   },
   (error) => {
     const originalRequest = error.config;
-    const refreshToken = localStorage.getItem("refresh");
+    const refreshToken = JSON.parse(localStorage.getItem("user")).refresh;
     if (
       error.response &&
       error.response.status === 401 &&
@@ -29,7 +29,9 @@ axiosApiInstance.interceptors.response.use(
       })
         .then((res) => res.json())
         .then((res) => {
-          localStorage.setItem("access", res.access);
+          let user = JSON.parse(localStorage.getItem("user"));
+          user.access = res.access;
+          localStorage.setItem("user", JSON.stringify(user));
           originalRequest.headers["Authorization"] = "Bearer " + res.access;
           return axios(originalRequest);
         });

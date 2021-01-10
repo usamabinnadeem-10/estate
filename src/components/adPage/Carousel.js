@@ -3,29 +3,29 @@ import Carousel, { Dots } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
 
 function MyCarousel(props) {
+  const [value, setValue] = useState(0);
+  const [slides, setSlides] = useState([]);
+  const [thumbnails, setThumbnails] = useState([]);
+
   useEffect(() => {
     let imgs = [];
     let thumbs = [];
     props.images.forEach((element) => {
+      console.log(element);
       imgs.push(
-        <a href={element} target="_blank">
-          <img
-            src={element}
-            style={{ maxWidth: "100%", height: "300px", objectFit: "contain" }}
-          />
-        </a>
+        <img
+          src={element.file}
+          style={{ maxWidth: "100%", height: "300px", objectFit: "contain" }}
+        />
       );
       thumbs.push(
-        <img src={element} style={{ width: "50px", height: "50px" }} />
+        <img src={element.file} style={{ width: "50px", height: "50px" }} />
       );
     });
+    console.log(imgs);
     setSlides(imgs);
     setThumbnails(thumbs);
-  }, []);
-
-  const [value, setValue] = useState(0);
-  const [slides, setSlides] = useState([]);
-  const [thumbnails, setThumbnails] = useState([]);
+  }, [props.images]);
 
   const onChange = (value) => {
     setValue(value);

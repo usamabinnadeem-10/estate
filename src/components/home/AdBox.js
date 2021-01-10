@@ -12,13 +12,21 @@ function AdBox(props) {
         setRedirect(true);
       }}
     >
-      {redirect && <Redirect push to="/Ad/1" />}
+      {redirect && (
+        <Redirect
+          push
+          to={{
+            pathname: "/Ad/" + props.ad.ad_id,
+            state: props.ad,
+          }}
+        />
+      )}
       <div
         className="w-100 m-0 p-0"
         style={{ height: "200px", overflow: "auto" }}
       >
         <img
-          src={props.images[0]}
+          src={props.images[0].file}
           style={{ width: "100%", objectFit: "contain" }}
         />
       </div>

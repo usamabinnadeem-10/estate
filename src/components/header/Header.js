@@ -8,7 +8,7 @@ import home from "@iconify/icons-mdi/home-outline";
 import SlidingPanel from "react-sliding-side-panel";
 import "react-sliding-side-panel/lib/index.css";
 
-function Header() {
+function Header(props) {
   const [hide, setHide] = useState(true);
   const [showMenu, setShowMenu] = useState(true);
   const [openPanel, setOpenPanel] = useState(false);
@@ -78,20 +78,29 @@ function Header() {
                     </Link>
                   </td>
                 </tr>
-                <tr className="text-center" style={{ height: "50px" }}>
-                  <td>
-                    <Link push to="/my" style={{ textDecoration: "none" }}>
-                      <h5 className="fw-bolder">My Profile</h5>
-                    </Link>
-                  </td>
-                </tr>
-                <tr className="text-center" style={{ height: "50px" }}>
-                  <td>
-                    <Link push to="/post-ad" style={{ textDecoration: "none" }}>
-                      <h5 className="fw-bolder">Place Ad</h5>
-                    </Link>
-                  </td>
-                </tr>
+                {props.loggedIn && (
+                  <tr className="text-center" style={{ height: "50px" }}>
+                    <td>
+                      <Link push to="/my" style={{ textDecoration: "none" }}>
+                        <h5 className="fw-bolder">My Profile</h5>
+                      </Link>
+                    </td>
+                  </tr>
+                )}
+                {props.loggedIn && (
+                  <tr className="text-center" style={{ height: "50px" }}>
+                    <td>
+                      <Link
+                        push
+                        to="/post-ad"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <h5 className="fw-bolder">Place Ad</h5>
+                      </Link>
+                    </td>
+                  </tr>
+                )}
+
                 <tr className="text-center" style={{ height: "50px" }}>
                   <td>
                     <Link
@@ -103,31 +112,55 @@ function Header() {
                     </Link>
                   </td>
                 </tr>
-                <tr className="text-center" style={{ height: "50px" }}>
-                  <td>
-                    <Link
-                      push
-                      to="/create-news"
-                      style={{ textDecoration: "none" }}
-                    >
-                      <h5 className="fw-bolder">Add News</h5>
-                    </Link>
-                  </td>
-                </tr>
-                <tr className="text-center" style={{ height: "50px" }}>
-                  <td>
-                    <Link push to="/login" style={{ textDecoration: "none" }}>
-                      <h5 className="fw-bolder">Login</h5>
-                    </Link>
-                  </td>
-                </tr>
-                <tr className="text-center" style={{ height: "50px" }}>
-                  <td>
-                    <Link push to="/signup" style={{ textDecoration: "none" }}>
-                      <h5 className="fw-bolder">Register</h5>
-                    </Link>
-                  </td>
-                </tr>
+                {props.loggedIn && (
+                  <tr className="text-center" style={{ height: "50px" }}>
+                    <td>
+                      <Link
+                        push
+                        to="/create-news"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <h5 className="fw-bolder">Add News</h5>
+                      </Link>
+                    </td>
+                  </tr>
+                )}
+                {!props.loggedIn && (
+                  <tr className="text-center" style={{ height: "50px" }}>
+                    <td>
+                      <Link push to="/login" style={{ textDecoration: "none" }}>
+                        <h5 className="fw-bolder">Login</h5>
+                      </Link>
+                    </td>
+                  </tr>
+                )}
+                {!props.loggedIn && (
+                  <tr className="text-center" style={{ height: "50px" }}>
+                    <td>
+                      <Link
+                        push
+                        to="/signup"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <h5 className="fw-bolder">Register</h5>
+                      </Link>
+                    </td>
+                  </tr>
+                )}
+                {props.loggedIn && (
+                  <tr className="text-center" style={{ height: "50px" }}>
+                    <td>
+                      <Link
+                        onClick={() => props.logout()}
+                        push
+                        to="/"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <h5 className="fw-bolder">Logout</h5>
+                      </Link>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>

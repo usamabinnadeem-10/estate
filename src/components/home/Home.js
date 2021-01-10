@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Buy from "./Buy";
 import Estimate from "./Estimate";
 
@@ -15,7 +15,7 @@ import {
   residential_by_the_day,
 } from "./constants";
 
-function Home() {
+function Home(props) {
   const [selected, setSelected] = useState(1);
   const [search, setSearch] = useState("");
   const [option, setOption] = useState("residential");
@@ -92,16 +92,6 @@ function Home() {
   const setPref2Helper = (pref) => {
     setPref2(pref);
   };
-
-  const imgs = [
-    "https://specials-images.forbesimg.com/imageserve/1026205392/960x0.jpg?fit=scale",
-    "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/modern-house-2-1538579843.jpg?crop=1.00xw:0.731xh;0,0.264xh&resize=980:*",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Tiny_house%2C_Portland.jpg/800px-Tiny_house%2C_Portland.jpg",
-  ];
-
-  const imgs2 = [
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Tiny_house%2C_Portland.jpg/800px-Tiny_house%2C_Portland.jpg",
-  ];
 
   return (
     <div className="d-flex flex-column">
@@ -307,7 +297,19 @@ function Home() {
             <u>Premium Ads</u>
           </h2>
           <div className="card col-11 d-flex flex-row flex-wrap mx-auto justify-content-evenly mt-5"></div>
-          <div className="card col-11 d-flex flex-row flex-wrap mx-auto justify-content-evenly mt-5"></div>
+          <div className="card col-11 d-flex flex-row flex-wrap mx-auto justify-content-evenly mt-5">
+            {props.ads.map((ad) => {
+              return (
+                <AdBox
+                  ad={ad}
+                  images={ad.images}
+                  rooms={ad.rooms}
+                  area={ad.area}
+                  location={ad.address}
+                />
+              );
+            })}
+          </div>
         </div>
         <div className="d-flex flex-column col-4">
           <h2 className="col-10 mx-auto">

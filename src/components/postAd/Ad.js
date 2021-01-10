@@ -6,8 +6,11 @@ import FeatureBox from "./FeatureBox";
 import Images from "./Images";
 import SellerInfo from "./SellerInfo";
 import { typeOf } from "react-multiple-image-input";
+import axios from "../../services/axios";
+import { URL } from "../../URL";
+import { config } from "../../URL";
 
-function Ad() {
+function Ad(props) {
   const [ad, setAd] = useState({
     latitude: "",
     longitude: "",
@@ -17,9 +20,9 @@ function Ad() {
     price: 0.0,
     currency: "",
     area: 0.0,
-    propertyType: "",
-    adType: "",
-    fromType: "",
+    property_type: "",
+    ad_type: "",
+    from_type: "",
     title: "",
     description: "",
     parameters: [],
@@ -85,6 +88,16 @@ function Ad() {
         // axios
         setError(false);
         setErrorMessage([]);
+        console.log(props.user.access);
+        console.log(config(props.user.access));
+        axios
+          .post(URL + "api/post-ad/", ad, config(props.user.access))
+          .then((res) => {
+            console.log("Ad posted");
+          })
+          .catch((err) => {
+            console.log(err.response.data);
+          });
       } else {
         if (!floorOkay) {
           errs.push("floor can not be more than floors");
