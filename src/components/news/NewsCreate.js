@@ -21,7 +21,10 @@ function NewsCreate() {
         placeholder="Title of your news"
       ></input>
       <Editor setDetail={setDetailHelper} />
-      <button className="btn btn-lg fw-bolder btn-success my-3">
+      <button
+        onClick={() => console.log(detail)}
+        className="btn btn-lg fw-bolder btn-success my-3"
+      >
         Post News
       </button>
     </div>

@@ -9,6 +9,16 @@ function Description(props) {
         <p>{props.detail}</p>
       </div>
       <FeatureRepresentation
+        feature={4}
+        title={"Main Highlights"}
+        featureArray={props.parameters}
+      />
+      <FeatureRepresentation
+        feature={5}
+        title={"Room Highlights"}
+        featureArray={props.roomsParams}
+      />
+      <FeatureRepresentation
         feature={1}
         title={"Feature 1"}
         floor={props.feature1.floor}

@@ -9,6 +9,8 @@ import MapSearch from "./components/mapSearch/MapSearch";
 import AdPage from "./components/adPage/AdPage";
 import NewsPage from "./components/home/NewsPage";
 import NewsCreate from "./components/news/NewsCreate";
+import NewsNew from "./components/news/NewsNew";
+import NewsFinal from "./components/news/NewsFInal";
 import Profile from "./components/userProfile/Profile";
 import { URL } from "./URL";
 import axios from "axios";
@@ -16,11 +18,37 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 function App() {
   const [allAds, setAllAds] = useState([]);
+  const [allNews, setAllNews] = useState([]);
+  const [fetched, setFetched] = useState(false);
+  const [currentLocation, setCurrentLocation] = useState({
+    lat: 55.748976622798736,
+    lng: 37.62533632839606,
+  });
+  useEffect(() => {
+    axios
+      .get(URL + "api/get-all-ads/")
+      .then((res) => {
+        setAllAds(res.data);
+        axios.get(URL + "api/news/").then((res) => {
+          setAllNews(res.data);
+        });
+      })
+      .then((res) => {
+        setFetched(true);
+      });
+  }, []);
 
   useEffect(() => {
-    axios.get(URL + "api/get-all-ads/").then((res) => {
-      setAllAds(res.data);
-    });
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setCurrentLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      });
+    } else {
+      window.alert("Please allow location access");
+    }
   }, []);
 
   const [user, setUser] = useState({});
@@ -68,7 +96,7 @@ function App() {
       <Header loggedIn={loggedIn} logout={logoutHelper} />
       <Switch>
         <Route exact path="/" component={Home}>
-          <Home ads={allAds} search={searchAds} />
+          <Home ads={allAds} news={allNews} search={searchAds} />
         </Route>
         {!loggedIn && (
           <Route exact path="/login" component={Login}>
@@ -89,15 +117,21 @@ function App() {
         )}
 
         <Route exact path="/Ad/:id" component={AdPage}>
-          <AdPage />
+          <AdPage loggedIn={loggedIn} />
         </Route>
         <Route exact path="/news-article/:id" component={NewsPage}>
           <NewsPage />
         </Route>
 
         {loggedIn && (
-          <Route exact path="/create-news" component={NewsCreate}>
-            <NewsCreate loggedIn={loggedIn} />
+          // <Route exact path="/create-news" component={NewsCreate}>
+          //   <NewsCreate loggedIn={loggedIn} />
+          // </Route>
+          // <Route exact path="/create-news" component={NewsNew}>
+          //   <NewsNew loggedIn={loggedIn} />
+          // </Route>
+          <Route exact path="/create-news" component={NewsFinal}>
+            <NewsFinal loggedIn={loggedIn} />
           </Route>
         )}
 
@@ -106,18 +140,15 @@ function App() {
             <Profile loggedIn={loggedIn} />
           </Route>
         )}
-
         <Route exact path="/map-search" component={MapSearch}>
           <div
             className="mb-4 d-flex flex-column"
             style={{ marginTop: "100px" }}
           >
             <h2 className="col-10 mx-auto my-4">Map Search</h2>
-            <MapSearch
-              center={{ lat: 40.6451594, lng: -74.0850826 }}
-              zoom={10}
-              places={[]}
-            />
+            {fetched && (
+              <MapSearch center={currentLocation} zoom={10} places={allAds} />
+            )}
           </div>
         </Route>
       </Switch>

@@ -1,6 +1,14 @@
 import React from "react";
 
 function FeatureRepresentation(props) {
+  const parking_types = {
+    1: "Residential Property",
+    2: "Country Estate",
+    3: "Commercial Property",
+    4: "All New Buildings",
+    5: "Daily Real Estate",
+  };
+
   return (
     <div className="d-flex flex-column my-3 col-6">
       <h4 className="text-muted fw-bolder">{props.title}</h4>
@@ -14,7 +22,7 @@ function FeatureRepresentation(props) {
       {props.feature === 2 && (
         <h5>
           <b>{props.livingSpace}</b> m<sup>2</sup> of living space with{" "}
-          {props.parking} parking
+          <b>{parking_types[props.parking]}</b> parking
         </h5>
       )}
 

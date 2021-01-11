@@ -8,7 +8,7 @@ import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import { URL } from "../../URL";
 
-function AdPage() {
+function AdPage(props) {
   const location = useLocation();
   const { id } = useParams();
   const [first, setFirst] = useState(true);
@@ -18,6 +18,8 @@ function AdPage() {
   const [fetched, setFetched] = useState(false);
   const [info, setInfo] = useState({});
   const [detail, setDetail] = useState();
+  const [parameters, setParameters] = useState([]);
+  const [roomsParams, setRoomsParams] = useState([]);
   const [feature1, setFeature1] = useState({});
   const [feature2, setFeature2] = useState({});
   const [feature3, setFeature3] = useState({});
@@ -32,6 +34,7 @@ function AdPage() {
         setAd(res.data);
         setImages(res.data[0].images);
         setInfo({
+          id: res.data[0].ad_id,
           address: res.data[0].address,
           rooms: res.data[0].rooms,
           metro: res.data[0].metro,
@@ -65,6 +68,8 @@ function AdPage() {
             longitude: res.data[0].longitude,
           },
         ]);
+        setParameters(res.data[0].parameters);
+        setRoomsParams(res.data[0].roomsParams);
       })
       .then((res) => {
         setFetched(true);
@@ -81,11 +86,13 @@ function AdPage() {
     >
       <div className="col-12 d-flex flex-row" style={{ height: "min-content" }}>
         {fetched ? <Carousel images={images} /> : null}
-        {fetched ? <InfoBox info={info} /> : null}
+        {fetched ? <InfoBox loggedIn={props.loggedIn} info={info} /> : null}
       </div>
       {fetched ? (
         <Description
           detail={detail}
+          parameters={parameters}
+          roomsParams={roomsParams}
           feature1={feature1}
           feature2={feature2}
           feature3={feature3}

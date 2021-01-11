@@ -341,7 +341,18 @@ function Home(props) {
             <u>News</u>
           </h2>
           <div className="d-flex flex-column card col-10 mx-auto mt-5">
-            <div className="px-2 py-3"></div>
+            <div className="px-2 py-3">
+              {props.news.map((news) => {
+                return (
+                  <News
+                    news={news}
+                    title={news.title}
+                    detail={news.detail}
+                    brief={news.detail.slice(0, 50)}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

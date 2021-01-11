@@ -46,8 +46,8 @@ const MapSearch = compose(
 
         return (
           <Marker
-            id={place.id}
-            key={place.id}
+            id={place.ad_id}
+            key={place.ad_id}
             position={{ lat: lat, lng: lng }}
             title="Click to zoom"
             onClick={props.onToggleOpen.bind(this, i)}
@@ -65,6 +65,10 @@ const MapSearch = compose(
                         <th>Price</th>
                         <td>{place.price} &#8381;</td>
                       </tr>
+                      <tr>
+                        <th>Address</th>
+                        <td>{place.address}</td>
+                      </tr>
                     </tbody>
                   </table>
                   <div
@@ -73,7 +77,7 @@ const MapSearch = compose(
                     data-bs-ride="carousel"
                   >
                     <ol className="carousel-indicators">
-                      {place.img.map((img, index) => {
+                      {place.images.map((img, index) => {
                         return index == 0 ? (
                           <li
                             data-bs-target="#carouselExampleIndicators"
@@ -89,7 +93,7 @@ const MapSearch = compose(
                       })}
                     </ol>
                     <div className="carousel-inner">
-                      {place.img.map((img, index) => {
+                      {place.images.map((img, index) => {
                         return index == 0 ? (
                           <div className="carousel-item active">
                             <img src={img.file} className="d-block w-100" />
