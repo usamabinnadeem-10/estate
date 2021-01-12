@@ -12,11 +12,10 @@ function NewsFinal() {
 
   const submitContent = () => {
     // const htmlContent = editorState.toHTML();
-    const htmlContent = editorState.toText();
-    console.log(htmlContent);
+    const textContent = editorState.toText();
     let data = {
       title: document.getElementById("title-news").value,
-      detail: htmlContent,
+      detail: textContent,
     };
 
     axios

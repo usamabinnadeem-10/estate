@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import styled from "styled-components";
 import axios from "axios";
+import { URL } from "../../URL";
+import { Redirect } from "react-router-dom";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -27,6 +29,7 @@ export default function SignUp() {
     password2: "",
   });
   const [error, setError] = useState(false);
+  const [registered, setRegistered] = useState(false);
 
   const updateState = (key, val) => {
     let temp = state;
@@ -36,6 +39,14 @@ export default function SignUp() {
 
   const handleClick = () => {
     // axios if successful, redirect to login page
+    axios
+      .post(URL + "auth/register/", state)
+      .then((res) => {
+        setRegistered(true);
+      })
+      .catch((err) => {
+        setError(true);
+      });
   };
 
   return (
@@ -44,6 +55,10 @@ export default function SignUp() {
       style={{ marginTop: "100px" }}
     >
       <h2>Register</h2>
+      {error && (
+        <p className="text-danger">Please remove errors and try again</p>
+      )}
+      {registered && <Redirect to="/login" />}
       <div className="d-flex flex-column my-3">
         <h6 className="text-muted">Username</h6>
         <input

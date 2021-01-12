@@ -16,7 +16,7 @@ const MapSearch = compose(
       "https://maps.googleapis.com/maps/api/js?key=AIzaSyDYuHFLdk-1Yw9IfmS2dtogQj1vL4DkO2E&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: (
-      <div className="col-10 mx-auto" style={{ height: "500px" }} />
+      <div className="col-10 mx-auto" style={{ height: "700px" }} />
     ),
     mapElement: <div style={{ height: "100%" }} />,
   }),

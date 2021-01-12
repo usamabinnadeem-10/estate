@@ -48,9 +48,9 @@ function Home(props) {
   const setPriceHelper = (amount, type) => {
     var temp = price;
     if (type === "min") {
-      temp["min"] = amount;
+      temp["min"] = parseFloat(amount);
     } else {
-      temp["max"] = amount;
+      temp["max"] = parseFloat(amount);
     }
     setPrice(temp);
   };
@@ -99,6 +99,10 @@ function Home(props) {
       (response) => {
         const { lat, lng } = response.results[0].geometry.location;
         setCoordinates({
+          lat: lat,
+          lng: lng,
+        });
+        props.setLocation({
           lat: lat,
           lng: lng,
         });
@@ -247,12 +251,14 @@ function Home(props) {
           />
         )}
 
-        <button
-          className="btn btn-primary btn-lg m-4"
-          onClick={() => go(search)}
-        >
-          Search
-        </button>
+        <div className="mt-4">
+          <button
+            className="btn btn-primary btn-lg mx-2"
+            onClick={() => go(search)}
+          >
+            Search
+          </button>
+        </div>
       </div>
       <div className="col-10 mx-auto my-3">
         <ul
@@ -320,9 +326,25 @@ function Home(props) {
           <h2 className="col-11 mx-auto">
             <u>Premium Ads</u>
           </h2>
-          <div className="card col-11 d-flex flex-row flex-wrap mx-auto justify-content-evenly mt-5"></div>
-          <div className="card col-11 d-flex flex-row flex-wrap mx-auto justify-content-evenly mt-5">
-            {props.ads.map((ad) => {
+          <div className="card col-11 d-flex flex-row flex-wrap mx-auto justify-content-evenly my-3">
+            {props.premium.map((ad) => {
+              return (
+                <AdBox
+                  ad={ad}
+                  price={ad.price}
+                  images={ad.images}
+                  rooms={ad.rooms}
+                  area={ad.area}
+                  location={ad.address}
+                />
+              );
+            })}
+          </div>
+          <h2 className="col-11 mx-auto mt-5">
+            <u>Regular Ads</u>
+          </h2>
+          <div className="card col-11 d-flex flex-row flex-wrap mx-auto justify-content-evenly my-3">
+            {props.regular.map((ad) => {
               return (
                 <AdBox
                   ad={ad}
@@ -340,7 +362,10 @@ function Home(props) {
           <h2 className="col-10 mx-auto">
             <u>News</u>
           </h2>
-          <div className="d-flex flex-column card col-10 mx-auto mt-5">
+          <div
+            className="d-flex flex-column card col-10 mx-auto my-3"
+            style={{ maxHeight: "500px", overflow: "auto" }}
+          >
             <div className="px-2 py-3">
               {props.news.map((news) => {
                 return (

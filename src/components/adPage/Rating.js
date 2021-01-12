@@ -10,7 +10,7 @@ function Rating(props) {
 
   const ratingChanged = (rating) => {
     if (!props.loggedIn) {
-      <Redirect push to="/signup" />;
+      props.response("Please register or login to rate.");
     } else {
       axios
         .post(

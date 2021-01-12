@@ -87,19 +87,14 @@ function Header(props) {
                     </td>
                   </tr>
                 )}
-                {props.loggedIn && (
-                  <tr className="text-center" style={{ height: "50px" }}>
-                    <td>
-                      <Link
-                        push
-                        to="/post-ad"
-                        style={{ textDecoration: "none" }}
-                      >
-                        <h5 className="fw-bolder">Place Ad</h5>
-                      </Link>
-                    </td>
-                  </tr>
-                )}
+
+                <tr className="text-center" style={{ height: "50px" }}>
+                  <td>
+                    <Link push to="/post-ad" style={{ textDecoration: "none" }}>
+                      <h5 className="fw-bolder">Place Ad</h5>
+                    </Link>
+                  </td>
+                </tr>
 
                 <tr className="text-center" style={{ height: "50px" }}>
                   <td>

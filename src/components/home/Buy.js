@@ -225,7 +225,10 @@ function Buy({
                       name={room}
                       value={room}
                     />
-                    <h6 className="mx-2">{room}</h6>
+                    <h6 className="mx-2">
+                      {room}
+                      {room == "6" && "+"}
+                    </h6>
                   </div>
                 );
               })}

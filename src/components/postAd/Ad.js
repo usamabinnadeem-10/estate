@@ -9,6 +9,7 @@ import { typeOf } from "react-multiple-image-input";
 import axios from "../../services/axios";
 import { URL } from "../../URL";
 import { config } from "../../URL";
+import { Redirect } from "react-router-dom";
 
 function Ad(props) {
   const [ad, setAd] = useState({
@@ -42,6 +43,7 @@ function Ad(props) {
 
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState([]);
+  const [fetched, setFetched] = useState(false);
 
   const setStateHelper = (key, val) => {
     let tempAd = ad;
@@ -88,12 +90,10 @@ function Ad(props) {
         // axios
         setError(false);
         setErrorMessage([]);
-        console.log(props.user.access);
-        console.log(config(props.user.access));
         axios
           .post(URL + "api/post-ad/", ad, config(props.user.access))
           .then((res) => {
-            console.log("Ad posted");
+            setFetched(true);
           })
           .catch((err) => {
             console.log(err.response.data);
@@ -121,6 +121,8 @@ function Ad(props) {
       className="d-flex flex-column mx-auto col-10"
       style={{ marginTop: "100px" }}
     >
+      {!props.loggedIn && <Redirect to="/login" />}
+      {fetched && <Redirect to="/" />}
       <div className="d-flex flex-column" style={{ margin: "10px 50px" }}>
         <h2>Post Ad</h2>
         {error && <p>Remove errors and try again</p>}
