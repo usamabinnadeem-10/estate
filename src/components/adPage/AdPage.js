@@ -63,7 +63,7 @@ function AdPage(props) {
           {
             name: res.data[0].title,
             price: res.data[0].price,
-            img: images,
+            images: res.data[0].images,
             latitude: res.data[0].latitude,
             longitude: res.data[0].longitude,
           },
